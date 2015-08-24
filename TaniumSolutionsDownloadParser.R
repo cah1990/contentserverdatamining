@@ -181,7 +181,7 @@ finalverdata <- finalverdata[c(2,3,1,5,4)]
 #Get rid of list formatting to enable writing to file
 finalverdata <- data.frame(lapply(finalverdata, as.character),stringsAsFactors = T)
 #write the results to a csv
-write.csv(finalverdata, file = "ServerVersionOutput.csv")
+write.csv(finalverdata, file = "results/ServerVersionOutput.csv")
 # Next goround:
 #http://stackoverflow.com/questions/5424648/add-date-and-time-to-pdf-output-file-name
 #paste(format(Sys.time(), "%Y-%m-%d %I-%p"), "pdf", sep = ".")
@@ -212,4 +212,4 @@ finalsoldata <- finalsoldata[c(2,3,1,4)]
 finalsoldata <- data.frame(lapply(finalsoldata, as.character), stringsAsFactors = T)
 
 #write the results to a csv
-write.csv(finalsoldata, file = "SolutionOutput.csv")
+write.csv(finalsoldata, file = "results/SolutionOutput.csv")
