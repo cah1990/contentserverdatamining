@@ -1,15 +1,18 @@
-content <- read.csv(file="20150723_214415_contentmap.csv", na.strings = c("","NA"), head=F,sep=",")
-solution <- read.csv(file="20150723_214407_solutionmap.csv", na.strings = c("","NA"), head=F,sep=",")
+#This file currently expects well-formatted data as input.
+#Next step is to do processing here.
+# content <- read.csv(file="20150723_214415_contentmap.csv", na.strings = c("","NA"), head=F,sep=",")
+# solution <- read.csv(file="20150723_214407_solutionmap.csv", na.strings = c("","NA"), head=F,sep=",")
+
 
 #setting up some data sets
 resolvedips <- data.frame(ip = NA, asn = NA)
 tmpdf1 <- data.frame()
 
 #give names to the source data columns just to be easier to work with
-colnames(content) <- c("ServerVersion","RefererURL","RequestingIP")
-colnames(solution) <- c("Bundle","RefererURL","RequestingIP")
+colnames(content) <- c("ServerVersion","RefererURL","Requester")
+colnames(solution) <- c("Bundle","RefererURL","Requester")
 
-merged <- merge(content,solution,by.x = "RequestingIP", by.y = "RequestingIP", all=T)
+merged <- merge(content,solution,by.x = "Requester", by.y = "Requester", all=T)
 
 #merely reformating the output here
 outputdata <- merged[c(2,4,1,3,5)]
@@ -18,7 +21,7 @@ outputdata <- merged[c(2,4,1,3,5)]
 source("geoaslookup.R")
 
 #get just the Requesting IPs from the data frame
-myips <- as.character(outputdata$RequestingIP)
+myips <- as.character(outputdata$Requester)
 
 #get a list of unique IPs to make the lookup less expensive
 uniqueips <- na.omit(unique(unlist(myips)))
@@ -34,7 +37,7 @@ for (i in 1:length(uniqueips[[1]])){
 resolvedips <- na.omit(resolvedips)
 #now time to merge the resolved ASN info with the list of info
 
-finaldata <- merge(merged,resolvedips, by.x = "RequestingIP", by.y = "ip", all=T)
+finaldata <- merge(merged,resolvedips, by.x = "Requester", by.y = "ip", all=T)
 finaldata <- finaldata[c(2,4,1,6,3,5)]
   
 #write the results to a csv

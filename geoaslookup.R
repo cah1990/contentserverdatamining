@@ -18,7 +18,7 @@ parse.geoiplookup <- function(x) {
     return(NULL)
   
   ## Country information:
-  asnum <- sub("GeoIP ASNum Edition: ", "", x[1])
+  asnum <- sub("GeoIP ASNum Edition: [a-z|A-Z|0-9]* ", "", x[1], fixed = F)
   #country <- strsplit(country, ", ")[[1]]
   
   ## City information:
@@ -29,6 +29,7 @@ parse.geoiplookup <- function(x) {
 #  c(asnum = country[1],
 #    country_name = country[2],
 #    city = city[3],
-#    city_lat = city[5],
-#    city_lon = city[6])
+#!    city_lat = city[5],
+#!    city_lon = city[6])
+#c(asnum = )
 }
