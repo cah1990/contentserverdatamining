@@ -211,5 +211,6 @@ finalsoldata <- finalsoldata[c(2,3,1,4)]
 #Get rid of list formatting to enable writing to file
 finalsoldata <- data.frame(lapply(finalsoldata, as.character), stringsAsFactors = T)
 
+
 #write the results to a csv
 write.csv(finalsoldata, file = "results/SolutionOutput.csv")
