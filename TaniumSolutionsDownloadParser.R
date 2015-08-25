@@ -1,4 +1,5 @@
 # To cleanse CDN Server logs
+# Chris Hughes
 # 
 #remove the next line's comment for a fresh read
 data0 <- readLines("data/access.log")
